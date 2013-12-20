@@ -281,6 +281,31 @@ doc ///
 	    diagrams according to different conventions.  These conventions
 	    are: ...
 ///
+
+doc ///
+    Key
+    	makePureBettiHK
+	(makePureBettiHK,List)
+    Headline
+        Pure Diagram with theoretical entries.
+    Usage
+    	makePureBettiDiagramHK(L)
+    Inputs
+    	L:List
+	    List of integers {d_1,...,d_n} such that d_i < d_{i+1} for each i
+    Outputs
+    	D:List
+	    A list of each (i,d_i)-th theoretical Betti number.
+    Description
+    	Text
+	    The list returned records the entries in the Betti diagram
+	    that are calculated according to the formula given in the first 
+	    Boij-Soederberg paper, where each entry is calculated using the 
+	    Herzog-Kuhl equations for the free resolutions of pure Cohen-Macaulay
+	    modules.
+    	Example
+	    makePureBettiHK({0,2,3})
+///
 	    
 doc ///
     Key
