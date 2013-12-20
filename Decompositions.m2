@@ -265,6 +265,48 @@ degreeDiff BettiTally := B -> (
      return apply(#D-1, i-> D#(i+1)#1-D#i#1 );
 )
 
+
+beginDocumentation();
+needsPackage "SimpleDoc"
+debug SimpleDoc
+
+doc ///
+    Key
+    	Decompositions
+    Headline
+    	Decompositions of Betti Diagrams with different conventions
+    Description
+    	Text
+	    This patch allows users to specify a decomposition into pure
+	    diagrams according to different conventions.  These conventions
+	    are: ...
+///
+	    
+doc ///
+    Key
+    	makePureBettiDiagramHK
+	(makePureBettiDiagramHK,List)	
+    Headline
+        Pure Diagram with theoretical entries.
+    Usage
+    	makePureBettiDiagramHK(L)
+    Inputs
+    	L:List
+	    List of integers {d_1,...,d_n} such that d_i < d_{i+1} for each i
+    Outputs
+    	B:BettiTally
+	    A Betti diagram with theoretical (possibly fractional entries)
+	    governed by the Herzog-Kuhl equation.
+    Description
+    	Text
+	    The Betti diagram returned has entries that are calculated according
+	    to the formula given in the first Boij-Soederberg paper, where each
+	    entry is calculated using the Herzog-Kuhl equations for the free resolutions
+	    of pure Cohen-Macaulay modules.
+    	Example
+	    makePureBettiDiagramHK({0,2,3})
+///
+
 end
 
 ---EXAMPLES---
@@ -292,46 +334,6 @@ bettiDEATH List := L -> (
      L={};
      return"   ,-------------.	\n  /               \\	\n /   __       __   \\	\n|  /,--.     ,--.\\  |	     \n|   \\  |  __ |  /   |     \n|    `-' /  \\`-/    |     \n \\__    |_/\\_|   __/     \n   /_           _\\	     \n   |B|,-.,-.,-.|I|	     \n   `-'|E||T||T|`-'	     \n   ,-.`-'`-'`-',-.	     \n   \\_|_,-.,-.,-|_/	     \n   | |_|_||_||_|   	     \n    `--______--'  	     ";
      )
-
-
-beginDocumentation();
-needsPackage "SimpleDoc"
-debug SimpleDoc
-
-doc ///
-    Key
-    	Decompositions
-    Headline
-    	Decompositions of Betti Diagrams with different conventions
-    Description
-    	Text
-	    This patch allows users to specify a decomposition into pure
-	    diagrams according to different conventions.  These conventions
-	    are: ...
-///
-	    
-doc ///
-    Key
-    	makePureBettiHK
-	(makePureBettiHK,List)	
-    Headline
-        Pure Betti Diagram with Theoretical Entries from Herzog-Kuhl Equations.
-    Usage
-    	makePureBettiHK(L)
-    Inputs
-    	L:List
-	    List of integers {d_1,...,d_n} such that d_i < d_{i+1} for each i
-    Outputs
-    	B:BettyTally
-	    A Betti diagram with theoretical (possibly fractional entries)
-	    governed by the Herzog-Kuhl equation.
-    Description
-    	Text
-	    The Betti diagram returned has entries that are calculated according
-	    to the formula given in the first Boij-Soederberg paper, where each
-	    entry is calculated using the Herzog-Kuhl equations for the free resolutions
-	    of pure Cohen-Macaulay modules.
-//    
 
 
 
