@@ -3,8 +3,19 @@ newPackage(
     	Version => "0.2", 
     	Date => "December 20, 2013",
     	Authors => {
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 	     {Name => "Branden Stone", Email => "bstone@bard.edu", HomePage => "http://math.bard.edu/~bstone"},
+	     {Name => "Courtney Gibbons", Email => "crgibbon@hamilton.edu", HomePage => "http://people.hamilton.edu/cgibbons"}
+=======
+=======
+>>>>>>> f2bc2c3df670d7204484a8162d89d3370d25763d
+=======
+>>>>>>> f2bc2c3df670d7204484a8162d89d3370d25763d
+	     {Name => "Branden Stone", Email => "bstone@bard.edu", HomePage => "http://math.bard.edu/~bstone/"},
 	     {Name => "Courtney Gibbons", Email => "s-cgibbon5@math.unl.edu", HomePage => "http://www.math.unl.edu/~s-cgibbon5/"}
+>>>>>>> f2bc2c3df670d7204484a8162d89d3370d25763d
 	     },
     	Headline => "Decompositions",
     	DebuggingMode => true
@@ -27,7 +38,7 @@ export {
      "isMassEliminate",
      "eliminateBetti",
      "degreeDiff",
-     "bettiDEATH",
+--     "bettiDEATH",
      
      -- Options
      "VariableName",
@@ -64,8 +75,10 @@ makePureBettiHK List := (degs) -> (
 	  )
      )
 
---  input:
--- output:
+--  input: List consisting of strictly increasing list of positive integers 
+--         (a degree sequence)
+-- output: BettiTally with the theoretical rational Betti numbers resulting from
+--         the Eisenbud-Schreyer constructions
     
 makePureBettiDiagramHK = method();
 makePureBettiDiagramHK List := (degs) -> (
@@ -85,8 +98,9 @@ decompose1 BettiTally := B -> (
      (C,ratio,merge(B,C, (i,j)->i-ratio*j))
      )
 
---  input:
--- output:
+--  input: List (a degree sequence)
+-- output: List (a list of the number of generators of the realization module
+--         in each degree)
 makePureBettiES = method()
 makePureBettiES List := (degs) -> (
      codim := #degs;
@@ -103,6 +117,9 @@ makePureBettiES List := (degs) -> (
 	  )
 )
 
+--  input: List (a degree sequence)
+-- output: BettiTally (the Betti table of the realization module
+--         for the given degree sequence)
 makePureBettiDiagramES = method()
 makePureBettiDiagramES List := (degs) -> (
      B := makePureBettiES degs;
@@ -123,16 +140,17 @@ decompose2 BettiTally := B -> (
 
 ---Methods for general use---
 
----Input: pure Betti table
----Output: degree sequence (or an error if the diagram isn't pure)
+--  input: pure Betti table
+-- output: degree sequence (or an error if the diagram isn't pure)
 listPureDegrees = method();
 listPureDegrees BettiTally := B -> (
      if lowestDegrees(B)==highestDegrees(B) then return highestDegrees(B)
      else return "Error: diagram is not pure."
      )
 
----Input: Betti table (eg, betti res M for a module M)
----Output: Sum of the pure diagrams as defined in Dan's lectures (with fractions from the H-K equations)
+--  input: Betti table (eg, betti res M for a module M)
+-- output: Sum of the pure diagrams as defined in Dan's lectures 
+--         (with fractions from the H-K equations)
 decomposeHK = method();
 decomposeHK BettiTally := B-> (
      Components:={};
@@ -146,8 +164,8 @@ decomposeHK BettiTally := B-> (
      sum Components
      )
 
----Input: Betti table
----Output: List of the coefficients with the pure degree sequences from above
+--  input: Betti table
+-- output: List of the coefficients with the pure degree sequences from above
 decomposeDegreesHK = method();
 decomposeDegreesHK BettiTally := B-> (
      Components:={};
@@ -161,8 +179,8 @@ decomposeDegreesHK BettiTally := B-> (
      Components
      )
 
----Input: Betti table (eg, betti res M for a module M)
----Output: Sum of the pure diagrams as defined in Dan's lectures (with fractions from the E-S existence proof)
+--  input: Betti table (eg, betti res M for a module M)
+-- output: Sum of the pure diagrams as defined in Dan's lectures (with fractions from the E-S existence proof)
 decomposeES = method();
 decomposeES BettiTally := B-> (
      Components:={};
@@ -227,14 +245,15 @@ eliminateBetti BettiTally := o -> B -> (
      
      if o.EliminationSequence == true then return apply( LD, l -> positions( l, i -> i != 0) );
      
-     c = pdim B;
+     c = pdim B + 1;
      p = #D;
                
      C = new MutableHashTable from B;
      
-     L = prepend( {p}, eliminateBetti( B, EliminationSequence => true ) );
+     L = prepend( {p}, eliminateBetti( B, EliminationSequence => true ) ); 
      LL = apply(c, j -> positions(L, l ->  any( l, i -> i == j  )  ) );
-     P = flatten append( prepend ( p, apply(1..(#LL-1), i ->  append(LL#i, p ) ) ), p );
+     P = flatten prepend ( p, apply(1..(#LL-1), i ->  append(LL#i, p ) ) );
+     if last LL == {0} then P = delete(0,P);
      K = sort keys C;
      scan(#P, i -> C#(K#i) = P#i );
      return new BettiEliminationTally from C;
@@ -386,13 +405,13 @@ loadPackage "BoijSoederberg"
 S = ZZ/101[x,y,z]
 M = S^1/ideal(x^2,y^2,z^2)
 isPure betti res M
-pureDegrees(betti res M)
+listPureDegrees(betti res M)
 decomposeHK(betti res M)
 decomposeDegrees(betti res N)
 
 N = M ++ S^1/ideal(x,y,z^3)
 isPure betti res N
-pureDegrees(betti res N)
+listPureDegrees(betti res N)
 decomposeHK(betti res N)
 decomposeDegrees(betti res N)
 
