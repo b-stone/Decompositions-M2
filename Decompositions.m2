@@ -232,7 +232,7 @@ eliminateBetti BettiTally := o -> B -> (
                
      C = new MutableHashTable from B;
      
-     L = prepend( {p}, eliminateBetti( B, EliminationSequence => true ) );
+     L = prepend( {p}, eliminateBetti( B, EliminationSequence => true ) ); 
      LL = apply(c, j -> positions(L, l ->  any( l, i -> i == j  )  ) );
      P = flatten prepend ( p, apply(1..(#LL-1), i ->  append(LL#i, p ) ) );
      if last LL == {0} then P = delete(0,P);
