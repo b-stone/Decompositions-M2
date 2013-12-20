@@ -12,7 +12,7 @@ newPackage(
 
 export {
      -- Methods
-     "makeCI",
+     --"makeCI",
      "pureBettiHK",
      "pureBettiDiagramHK",
      "pureDegreesHK",
