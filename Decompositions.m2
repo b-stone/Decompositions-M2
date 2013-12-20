@@ -41,27 +41,7 @@ needsPackage("BoijSoederberg");
 -- New Types
 ----------------------------------------------------------------------
 BettiDeathTally = new Type of BettiTally;
-
-----------------------------------------------------------------------
---     To use this file: 
---     In your M2 session, load this file:
---     Copy to your local M2 code folder, then run
---     installPackage "Decompositions"
---     loadPackage "Decompositions"
---     The functions you will probably want to use are the following:
---          makeCI
---     	    pureDegrees,
---          pureBettiHK,
---     	    decomposeHK, 
---     	    decomposeDegreesHK
---
-----------------------------------------------------------------------
-
-bettiDEATH = method();
-bettiDEATH List := L -> (
-     L={};
-     return"   ,-------------.	\n  /               \\	\n /   __       __   \\	\n|  /,--.     ,--.\\  |	     \n|   \\  |  __ |  /   |     \n|    `-' /  \\`-/    |     \n \\__    |_/\\_|   __/     \n   /_           _\\	     \n   |B|,-.,-.,-.|I|	     \n   `-'|E||T||T|`-'	     \n   ,-.`-'`-'`-',-.	     \n   \\_|_,-.,-.,-|_/	     \n   | |_|_||_||_|   	     \n    `--______--'  	     ";
-     )
+BettiEliminationTally = new Type of BettiTally;
 
 
 ---Helper functions (you should ignore these)
@@ -217,10 +197,10 @@ massExtinction BettiTally :=  B -> (
 
 --  input:  BettiTally of a Cohen-Macaulay Module
 --     	    Cohen-Macualay Ideal
--- output:  List, if no mass extinction occors, a list is given sequencing
---     	    the homological degree of betti death
--- options: DeathSequence => Boolean; default is false, thus the output is 
---     	    a BettiDeathTable.  If true, only the DeathSequence is returned.
+-- output:  List, if no mass elimination occors, a list is given sequencing
+--     	    the homological degree of the elimination of betti numbers
+-- options: EliminationSequence => Boolean; default is false, thus the output is 
+--     	    a BettiTally.  If true, only the EliminationSequence is returned.
 bettiDeath = method(Options =>{DeathSequence => false});
 bettiDeath BettiTally := o -> B -> (
      local D; local LD;
@@ -243,7 +223,7 @@ bettiDeath BettiTally := o -> B -> (
      P = flatten append( prepend ( p, apply(1..(#LL-1), i ->  append(LL#i, p ) ) ), p );
      K = sort keys C;
      scan(#P, i -> C#(K#i) = P#i );
-     return new BettiDeathTally from C;
+     return new BettiEliminationTally from C;
     )
 
 bettiDeath Ideal := o -> I -> (
@@ -290,3 +270,11 @@ decomposeDegrees(betti res N)
 
 restart
 makeCI {2,2,8}
+
+
+-- Home of bettiDEATH
+bettiDEATH = method();
+bettiDEATH List := L -> (
+     L={};
+     return"   ,-------------.	\n  /               \\	\n /   __       __   \\	\n|  /,--.     ,--.\\  |	     \n|   \\  |  __ |  /   |     \n|    `-' /  \\`-/    |     \n \\__    |_/\\_|   __/     \n   /_           _\\	     \n   |B|,-.,-.,-.|I|	     \n   `-'|E||T||T|`-'	     \n   ,-.`-'`-'`-',-.	     \n   \\_|_,-.,-.,-|_/	     \n   | |_|_||_||_|   	     \n    `--______--'  	     ";
+     )
