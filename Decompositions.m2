@@ -25,13 +25,13 @@ export {
      "decomposeDegreesES",
      "pureDegrees",
      "massExtinction",
-     "bettiDeath",
+     "eliminateBetti",
      "degreeDiff",
      "bettiDEATH",
      
      -- Options
      "VariableName",
-     "DeathSequence"
+     "EliminationSequence"
 
 }
 
@@ -201,8 +201,8 @@ massExtinction BettiTally :=  B -> (
 --     	    the homological degree of the elimination of betti numbers
 -- options: EliminationSequence => Boolean; default is false, thus the output is 
 --     	    a BettiTally.  If true, only the EliminationSequence is returned.
-bettiDeath = method(Options =>{DeathSequence => false});
-bettiDeath BettiTally := o -> B -> (
+eliminateBetti = method(Options =>{EliminationSequence => false});
+eliminateBetti BettiTally := o -> B -> (
      local D; local LD;
      local C;local L; local LL; local P; local K; local p; local c;
      
