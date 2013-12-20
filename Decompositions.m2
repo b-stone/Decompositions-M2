@@ -27,7 +27,7 @@ export {
      "isMassEliminate",
      "eliminateBetti",
      "degreeDiff",
-     "bettiDEATH",
+--     "bettiDEATH",
      
      -- Options
      "VariableName",
