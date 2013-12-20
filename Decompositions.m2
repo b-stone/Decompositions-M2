@@ -3,7 +3,7 @@ newPackage(
     	Version => "0.2", 
     	Date => "December 20, 2013",
     	Authors => {
-	     {Name => "Branden Stone", Email => "bstone@bard.edu", HomePage => "http://math.bard.edu/~bstone"},
+	     {Name => "Branden Stone", Email => "bstone@bard.edu", HomePage => "http://math.bard.edu/~bstone/"},
 	     {Name => "Courtney Gibbons", Email => "s-cgibbon5@math.unl.edu", HomePage => "http://www.math.unl.edu/~s-cgibbon5/"}
 	     },
     	Headline => "Decompositions",
