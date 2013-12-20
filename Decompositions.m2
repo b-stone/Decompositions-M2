@@ -13,17 +13,17 @@ newPackage(
 export {
      -- Methods
      --"makeCI",
-     "pureBettiHK",
-     "pureBettiDiagramHK",
-     "pureDegreesHK",
+     "makePureBettiHK",
+     "makePureBettiDiagramHK",
+     "makePureDegreesHK",
      "decomposeHK",
      "decomposeDegreesHK",
-     "pureBettiES",
-     "pureBettiDiagramES",
-     "pureDegreesES",
+     "makePureBettiES",
+     "makePureBettiDiagramES",
+     "makePureDegreesES",
      "decomposeES",
      "decomposeDegreesES",
-     "pureDegrees",
+     "listPureDegrees",
      "isMassEliminate",
      "eliminateBetti",
      "degreeDiff",
@@ -63,7 +63,6 @@ makePureBettiHK List := (degs) -> (
 	  1/(product(for j from 0 to i-1 list degs#i-degs#j) * product(for j from i+1 to codim-1 list degs#j-degs#i))
 	  )
      )
-
     
 makePureBettiDiagramHK = method();
 makePureBettiDiagramHK List := (degs) -> (
@@ -88,6 +87,7 @@ makePureBettiES List := (degs) -> (
 	 binomial(degs#i -1,degs#i-degs#(i-1) - 1)
 	 );
      b0 := (product L)*(1/(makePureBettiDiagramHK(degs))#((0,{0},0)));
+     --returns an error if the first degree is not 0. need to fix.
      for i from 0 to codim-1 list
      (
 	  b0/(product(for j from 0 to i-1 list degs#i-degs#j) * product(for j from i+1 to codim-1 list degs#j-degs#i))
