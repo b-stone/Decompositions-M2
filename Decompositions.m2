@@ -24,7 +24,7 @@ export {
      "decomposeES",
      "decomposeDegreesES",
      "pureDegrees",
-     "massExtinction",
+     "isMassEliminate",
      "eliminateBetti",
      "degreeDiff",
      "bettiDEATH",
@@ -180,8 +180,8 @@ decomposeDegreesES BettiTally := B -> (
 -- output:  Boolean Value, True if more than one betti dies in the
 --     	    decompose algorithm     	    
 -- caveat:  Prints a warning if not the "Generic Case"
-massExtinction = method();
-massExtinction BettiTally :=  B -> (
+isMassEliminate = method();
+isMassEliminate BettiTally :=  B -> (
       local SCAN; local D; local LD;
             
       scan( values B, i -> if i != 1 then break print "-- Warning: Not Generic Case");
@@ -206,19 +206,19 @@ eliminateBetti BettiTally := o -> B -> (
      local D; local LD;
      local C;local L; local LL; local P; local K; local p; local c;
      
-     if massExtinction(B) == true then print"\n --MASS EXTINCTION!--";
+     if isMassEliminate(B) == true then print"\n --MASS EXTINCTION!--";
      
      D = decomposeDegreesHK B;
      LD = apply(#D-1, i-> D#(i+1)#1-D#i#1 );
      
-     if o.DeathSequence == true then return apply( LD, l -> positions( l, i -> i != 0) );
+     if o.EliminationSequence == true then return apply( LD, l -> positions( l, i -> i != 0) );
      
      c = pdim B;
      p = #D;
                
      C = new MutableHashTable from B;
      
-     L = prepend( {p}, bettiDeath( B, DeathSequence => true ) );
+     L = prepend( {p}, eliminateBetti( B, EliminationSequence => true ) );
      LL = apply(c, j -> positions(L, l ->  any( l, i -> i == j  )  ) );
      P = flatten append( prepend ( p, apply(1..(#LL-1), i ->  append(LL#i, p ) ) ), p );
      K = sort keys C;
@@ -226,8 +226,8 @@ eliminateBetti BettiTally := o -> B -> (
      return new BettiEliminationTally from C;
     )
 
-bettiDeath Ideal := o -> I -> (
-     return bettiDeath( betti res I, DeathSequence => o.DeathSequence );
+eliminateBetti Ideal := o -> I -> (
+     return eliminateBetti( betti res I, EliminationSequence => o.EliminationSequence );
      )
  
 --  input: List of degrees (type of an artinian complete intersection)
