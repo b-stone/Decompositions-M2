@@ -66,7 +66,7 @@ makePureBettiHK List := (degs) -> (
 
 (
     
-makePureBettiDiagramHK = method()
+makePureBettiDiagramHK = method();
 makePureBettiDiagramHK List := (degs) -> (
      B := makePureBettiHK degs;
      new BettiTally from apply(#degs, i -> (i, {degs#i}, degs#i) => B#i)
