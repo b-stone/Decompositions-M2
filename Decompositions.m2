@@ -63,7 +63,7 @@ makePureBettiHK List := (degs) -> (
 	  1/(product(for j from 0 to i-1 list degs#i-degs#j) * product(for j from i+1 to codim-1 list degs#j-degs#i))
 	  )
      )
-)
+
     
 makePureBettiDiagramHK = method();
 makePureBettiDiagramHK List := (degs) -> (
