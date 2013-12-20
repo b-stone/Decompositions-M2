@@ -227,14 +227,14 @@ eliminateBetti BettiTally := o -> B -> (
      
      if o.EliminationSequence == true then return apply( LD, l -> positions( l, i -> i != 0) );
      
-     c = pdim B + 1;
+     c = pdim B;
      p = #D;
                
      C = new MutableHashTable from B;
      
      L = prepend( {p}, eliminateBetti( B, EliminationSequence => true ) );
      LL = apply(c, j -> positions(L, l ->  any( l, i -> i == j  )  ) );
-     P = flatten prepend ( p, apply(1..(#LL-1), i ->  append(LL#i, p ) ) );
+     P = flatten append( prepend ( p, apply(1..(#LL-1), i ->  append(LL#i, p ) ) ), p );
      K = sort keys C;
      scan(#P, i -> C#(K#i) = P#i );
      return new BettiEliminationTally from C;
@@ -331,6 +331,53 @@ doc ///
     	Example
 	    makePureBettiDiagramHK({0,2,3})
 ///
+
+doc ///
+    Key
+    	makePureBettiES
+	(makePureBettiES,List)
+    Headline
+        Pure Diagram with theoretical entries.
+    Usage
+    	makePureBettiDiagramES(L)
+    Inputs
+    	L:List
+	    List of integers {d_1,...,d_n} such that d_i < d_{i+1} for each i
+    Outputs
+    	D:List
+	    A list of each (i,d_i)-th theoretical Betti number.
+    Description
+    	Text
+	    The list returned records the Betti numbers
+	    of the realization module for the input degree sequence, as
+	    constructed by Eisenbud and Schreyer.
+    	Example
+	    makePureBettiES({0,2,3})
+///
+	    
+doc ///
+    Key
+    	makePureBettiDiagramES
+	(makePureBettiDiagramES,List)	
+    Headline
+        Pure Diagram of a CM realization module.
+    Usage
+    	makePureBettiDiagramES(L)
+    Inputs
+    	L:List
+	    List of integers {d_1,...,d_n} such that d_i < d_{i+1} for each i
+    Outputs
+    	B:BettiTally
+	    A Betti diagram with actual Betti 
+    Description
+    	Text
+	    The Betti diagram returned has entries that are the Betti numbers
+	    of the realization module for the input degree sequence, as
+	    constructed by Eisenbud and Schreyer.
+    	Example
+	    makePureBettiDiagramES({0,2,3})
+///
+
 
 end
 
