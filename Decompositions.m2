@@ -51,10 +51,12 @@ isStrictlyIncreasing List := L -> (
      for i from 0 to #L-2 do t=(t and (L_i<L_(i+1)));
      t)
 
---Input: Degs must be a strictly increasing list of positive integers
---Output: List of theoretical rational Betti numbers resulting from the Herzog-Kuhl equations
-pureBettiHK = method()
-pureBettiHK List := (degs) -> (
+--  input: List consisting of strictly increasing list of positive integers 
+--         (a degree sequence)
+-- output: List of theoretical rational Betti numbers resulting from the 
+--         Herzog-Kuhl equations
+makePureBettiHK = method()
+makePureBettiHK List := (degs) -> (
      codim := #degs;
      for i from 0 to codim-1 list
      (
@@ -62,10 +64,11 @@ pureBettiHK List := (degs) -> (
 	  )
      )
 
-
-pureBettiDiagramHK = method()
-pureBettiDiagramHK List := (degs) -> (
-     B := pureBettiHK degs;
+(
+    
+makePureBettiDiagramHK = method()
+makePureBettiDiagramHK List := (degs) -> (
+     B := makePureBettiHK degs;
      new BettiTally from apply(#degs, i -> (i, {degs#i}, degs#i) => B#i)
      )
 
@@ -73,28 +76,28 @@ decompose1 = method();
 decompose1 BettiTally := B -> (
      L:=lowestDegrees B;
      if not isStrictlyIncreasing L then print "NOT IN THIS SIMPLEX OF PURE BETTI DIAGRAMS";
-     C:=pureBettiDiagramHK L;
+     C:=makePureBettiDiagramHK L;
      ratio:=min apply(#L, i->(B#(i,{L_i}, L_i))/(C#(i,{L_i},L_i)));
      (C,ratio,merge(B,C, (i,j)->i-ratio*j))
      )
 
-pureBettiES = method()
-pureBettiES List := (degs) -> (
+makePureBettiES = method()
+makePureBettiES List := (degs) -> (
      codim := #degs;
      L := for i from 1 to codim-1 list
      (
 	 binomial(degs#i -1,degs#i-degs#(i-1) - 1)
 	 );
-     b0 := (product L)*(1/(pureBettiDiagramHK(degs))#((0,{0},0)));
+     b0 := (product L)*(1/(makePureBettiDiagramHK(degs))#((0,{0},0)));
      for i from 0 to codim-1 list
      (
 	  b0/(product(for j from 0 to i-1 list degs#i-degs#j) * product(for j from i+1 to codim-1 list degs#j-degs#i))
 	  )
 )
 
-pureBettiDiagramES = method()
-pureBettiDiagramES List := (degs) -> (
-     B := pureBettiES degs;
+makePureBettiDiagramES = method()
+makePureBettiDiagramES List := (degs) -> (
+     B := makePureBettiES degs;
      new BettiTally from apply(#degs, i -> (i, {degs#i}, degs#i) => B#i)
      )
 
@@ -102,7 +105,7 @@ decompose2 = method();
 decompose2 BettiTally := B -> (
      L:=lowestDegrees B;
      if not isStrictlyIncreasing L then print "NOT IN THIS SIMPLEX OF PURE BETTI DIAGRAMS";
-     C:=pureBettiDiagramES L;
+     C:=makePureBettiDiagramES L;
      ratio:=min apply(#L, i->(B#(i,{L_i}, L_i))/(C#(i,{L_i},L_i)));
      (C,ratio,merge(B,C, (i,j)->i-ratio*j))
      )
@@ -111,8 +114,8 @@ decompose2 BettiTally := B -> (
 
 ---Input: pure Betti table
 ---Output: degree sequence (or an error if the diagram isn't pure)
-pureDegrees = method();
-pureDegrees BettiTally := B -> (
+listPureDegrees = method();
+listPureDegrees BettiTally := B -> (
      if lowestDegrees(B)==highestDegrees(B) then return highestDegrees(B)
      else return "Error: diagram is not pure."
      )
@@ -143,7 +146,7 @@ decomposeDegreesHK BettiTally := B-> (
 	  B1=new MutableHashTable from X_2;
 	  --change the type of the values in X_0 to ZZ
 	  Y:=new BettiTally from apply(pairs X_0, i->{first i, last i});
-	  Components = append(Components, (X_1,pureDegrees(Y))));
+	  Components = append(Components, (X_1,listPureDegrees(Y))));
      Components
      )
 
@@ -171,7 +174,7 @@ decomposeDegreesES BettiTally := B -> (
 	  B1=new MutableHashTable from X_2;
 	  --change the type of the values in X_0 to ZZ
 	  Y:=new BettiTally from apply(pairs X_0, i->{first i, last i});
-	  Components = append(Components, (X_1,pureDegrees(Y))));
+	  Components = append(Components, (X_1,listPureDegrees(Y))));
      Components
      )
      
