@@ -12,7 +12,7 @@ newPackage(
 
 export {
      -- Methods
-     "makeCI",
+     --"makeCI",
      "pureBettiHK",
      "pureBettiDiagramHK",
      "pureDegreesHK",
@@ -229,12 +229,12 @@ eliminateBetti BettiTally := o -> B -> (
 bettiDeath Ideal := o -> I -> (
      return bettiDeath( betti res I, DeathSequence => o.DeathSequence );
      )
-
----Input: List of degrees (type of an artinian complete intersection)
----Output: the Betti table of such a CI
+ 
+--  input: List of degrees (type of an artinian complete intersection)
+--  output: BettiTally of such a complete intersection
 makeCI = method(Options=>{VariableName=>getSymbol "tt"});
 makeCI List := opts -> degs ->  (
-     c := #degs;
+     c := #degs; 
      tt := opts.VariableName;
      S := ZZ/499[tt_1..tt_c];
      G := toSequence(for i from 0 to (c-1) list S_i^(degs#i));
