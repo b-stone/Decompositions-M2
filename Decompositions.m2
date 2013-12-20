@@ -234,7 +234,7 @@ eliminateBetti BettiTally := o -> B -> (
      
      L = prepend( {p}, eliminateBetti( B, EliminationSequence => true ) );
      LL = apply(c, j -> positions(L, l ->  any( l, i -> i == j  )  ) );
-     P = flatten append( prepend ( p, apply(1..(#LL-1), i ->  append(LL#i, p ) ) ), p );
+     P = flatten prepend ( p, apply(1..(#LL-1), i ->  append(LL#i, p ) ) );
      if last LL == {0} then P = delete(0,P);
      K = sort keys C;
      scan(#P, i -> C#(K#i) = P#i );
