@@ -63,6 +63,9 @@ makePureBettiHK List := (degs) -> (
 	  1/(product(for j from 0 to i-1 list degs#i-degs#j) * product(for j from i+1 to codim-1 list degs#j-degs#i))
 	  )
      )
+
+--  input:
+-- output:
     
 makePureBettiDiagramHK = method();
 makePureBettiDiagramHK List := (degs) -> (
@@ -70,6 +73,9 @@ makePureBettiDiagramHK List := (degs) -> (
      new BettiTally from apply(#degs, i -> (i, {degs#i}, degs#i) => B#i)
      )
 
+-- This helper method is used to compute...
+--  input:
+-- output:
 decompose1 = method();
 decompose1 BettiTally := B -> (
      L:=lowestDegrees B;
@@ -79,6 +85,8 @@ decompose1 BettiTally := B -> (
      (C,ratio,merge(B,C, (i,j)->i-ratio*j))
      )
 
+--  input:
+-- output:
 makePureBettiES = method()
 makePureBettiES List := (degs) -> (
      codim := #degs;
@@ -86,7 +94,8 @@ makePureBettiES List := (degs) -> (
      (
 	 binomial(degs#i -1,degs#i-degs#(i-1) - 1)
 	 );
-     b0 := (product L)*(1/(makePureBettiDiagramHK(degs))#((0,{0},0)));
+     tag := first sort keys makePureBettiDiagramHK(degs);
+     b0 := (product L)*(1/(makePureBettiDiagramHK(degs))#tag);
      --returns an error if the first degree is not 0. need to fix.
      for i from 0 to codim-1 list
      (
@@ -100,6 +109,9 @@ makePureBettiDiagramES List := (degs) -> (
      new BettiTally from apply(#degs, i -> (i, {degs#i}, degs#i) => B#i)
      )
 
+-- this helper method is used to compute...
+--  input:
+-- output:
 decompose2 = method();
 decompose2 BettiTally := B -> (
      L:=lowestDegrees B;
@@ -280,3 +292,46 @@ bettiDEATH List := L -> (
      L={};
      return"   ,-------------.	\n  /               \\	\n /   __       __   \\	\n|  /,--.     ,--.\\  |	     \n|   \\  |  __ |  /   |     \n|    `-' /  \\`-/    |     \n \\__    |_/\\_|   __/     \n   /_           _\\	     \n   |B|,-.,-.,-.|I|	     \n   `-'|E||T||T|`-'	     \n   ,-.`-'`-'`-',-.	     \n   \\_|_,-.,-.,-|_/	     \n   | |_|_||_||_|   	     \n    `--______--'  	     ";
      )
+
+
+beginDocumentation();
+needsPackage "SimpleDoc"
+debug SimpleDoc
+
+doc ///
+    Key
+    	Decompositions
+    Headline
+    	Decompositions of Betti Diagrams with different conventions
+    Description
+    	Text
+	    This patch allows users to specify a decomposition into pure
+	    diagrams according to different conventions.  These conventions
+	    are: ...
+///
+	    
+doc ///
+    Key
+    	makePureBettiHK
+	(makePureBettiHK,List)	
+    Headline
+        Pure Betti Diagram with Theoretical Entries from Herzog-Kuhl Equations.
+    Usage
+    	makePureBettiHK(L)
+    Inputs
+    	L:List
+	    List of integers {d_1,...,d_n} such that d_i < d_{i+1} for each i
+    Outputs
+    	B:BettyTally
+	    A Betti diagram with theoretical (possibly fractional entries)
+	    governed by the Herzog-Kuhl equation.
+    Description
+    	Text
+	    The Betti diagram returned has entries that are calculated according
+	    to the formula given in the first Boij-Soederberg paper, where each
+	    entry is calculated using the Herzog-Kuhl equations for the free resolutions
+	    of pure Cohen-Macaulay modules.
+//    
+
+
+
