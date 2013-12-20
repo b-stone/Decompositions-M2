@@ -1,10 +1,11 @@
 newPackage(
 	"Decompositions",
-    	Version => "0.1", 
-    	Date => "June 10, 2013",
+    	Version => "0.2", 
+    	Date => "December 20, 2013",
     	Authors => {
-	     {Name => "Branden Stone", Email => "bstone@math.ku.edu", HomePage => "http://www.math.ku.edu/~bstone"},
-	     {Name => "Courtney Gibbons", Email => "s-cgibbon5@math.unl.edu", HomePage => "http://www.math.unl.edu/~s-cgibbon5/"},
+	     {Name => "Branden Stone", Email => "bstone@bard.edu", HomePage => "http://math.bard.edu/~bstone"},
+	     {Name => "Courtney Gibbons", Email => "s-cgibbon5@math.unl.edu", HomePage => "http://www.math.unl.edu/~s-cgibbon5/"}
+	     },
     	Headline => "Decompositions",
     	DebuggingMode => true
     	)
