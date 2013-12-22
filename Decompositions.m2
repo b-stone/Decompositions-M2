@@ -3,22 +3,8 @@ newPackage(
     	Version => "0.2", 
     	Date => "December 20, 2013",
     	Authors => {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 	     {Name => "Branden Stone", Email => "bstone@bard.edu", HomePage => "http://math.bard.edu/~bstone"},
 	     {Name => "Courtney Gibbons", Email => "crgibbon@hamilton.edu", HomePage => "http://people.hamilton.edu/cgibbons"}
-=======
-=======
->>>>>>> f2bc2c3df670d7204484a8162d89d3370d25763d
-=======
->>>>>>> f2bc2c3df670d7204484a8162d89d3370d25763d
-=======
->>>>>>> f2bc2c3df670d7204484a8162d89d3370d25763d
-	     {Name => "Branden Stone", Email => "bstone@bard.edu", HomePage => "http://math.bard.edu/~bstone/"},
-	     {Name => "Courtney Gibbons", Email => "s-cgibbon5@math.unl.edu", HomePage => "http://www.math.unl.edu/~s-cgibbon5/"}
->>>>>>> f2bc2c3df670d7204484a8162d89d3370d25763d
 	     },
     	Headline => "Decompositions",
     	DebuggingMode => true
