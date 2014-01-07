@@ -3,8 +3,12 @@ newPackage(
     	Version => "0.2", 
     	Date => "December 20, 2013",
     	Authors => {
-	     {Name => "Branden Stone", Email => "bstone@bard.edu", HomePage => "http://math.bard.edu/~bstone"},
-	     {Name => "Courtney Gibbons", Email => "crgibbon@hamilton.edu", HomePage => "http://people.hamilton.edu/cgibbons"}
+	     {Name => "Branden Stone", 
+		 Email => "bstone@bard.edu", 
+		 HomePage => "http://math.bard.edu/~bstone"},
+	     {Name => "Courtney Gibbons", 
+		 Email => "crgibbon@hamilton.edu", 
+		 HomePage => "http://people.hamilton.edu/cgibbons"}
 	     },
     	Headline => "Decompositions",
     	DebuggingMode => true
@@ -68,16 +72,14 @@ makePureBettiHK List := (degs) -> (
 --         (a degree sequence)
 -- output: BettiTally with the theoretical rational Betti numbers resulting from
 --         the Eisenbud-Schreyer constructions
-    
 makePureBettiDiagramHK = method();
 makePureBettiDiagramHK List := (degs) -> (
      B := makePureBettiHK degs;
      new BettiTally from apply(#degs, i -> (i, {degs#i}, degs#i) => B#i)
      )
 
--- This helper method is used to compute...
---  input:
--- output:
+
+--  input: BettiTally
 decompose1 = method();
 decompose1 BettiTally := B -> (
      L:=lowestDegrees B;
@@ -115,9 +117,8 @@ makePureBettiDiagramES List := (degs) -> (
      new BettiTally from apply(#degs, i -> (i, {degs#i}, degs#i) => B#i)
      )
 
--- this helper method is used to compute...
---  input:
--- output:
+
+--  input: BettiTally
 decompose2 = method();
 decompose2 BettiTally := B -> (
      L:=lowestDegrees B;
